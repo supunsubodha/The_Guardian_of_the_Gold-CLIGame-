@@ -1,10 +1,13 @@
 public class Player {
-    String name;
+    String username;
     int score;
     int level;
 
     Player (String name){
-        this.name = name;
+        this.username = name;
     }
+    public void loadPlayerDetails(){
 
+    }
 }
+
