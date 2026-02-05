@@ -6,8 +6,5 @@ public class Player {
     Player (String name){
         this.username = name;
     }
-    public void loadPlayerDetails(){
-
-    }
 }
 
