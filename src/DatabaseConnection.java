@@ -62,21 +62,6 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
-    public static void createUser(String username, int score, int level){
-        String sql = "INSERT INTO users(username, score, level) VALUES (?, ?, ?)" +
-                     " ON DUPLICATE KEY UPDATE score = VALUES(score), level = VALUES(level)";
-        try (Connection conn = DriverManager.getConnection(url,user,password);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, username);
-            pstmt.setInt(2, score);
-            pstmt.setInt(3, level);
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     //Loading data from database
     public static int[] loadUserData(String username){
         int score = 0; // default

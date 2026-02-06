@@ -6,6 +6,21 @@ public class Main {
     static int level;
     static String [][]board;
     public static void main(String[] args) {
+
+        // initialize board BEFORE selecting map to avoid NullPointerException in Maps
+        board = new String[][]{
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
+                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "}
+        };
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the treasure hunt game!");
 
@@ -39,7 +54,9 @@ public class Main {
                 username = sc.next().toLowerCase();
                 score = 0;
                 level = 0;
-                DatabaseConnection.createUser(username,score,level);
+                // Quote the username so SQL treats it as a string literal.
+                String sql = "INSERT INTO users (username,score,level) VALUES ('" + username + "'," + score + "," + level + ")";
+                DatabaseConnection.sqlExecuter(sql);
             }else{
                 System.out.println("invalid input");
                 Main main;
@@ -55,20 +72,6 @@ public class Main {
             level = 1;
             DatabaseConnection.sqlExecuter("UPDATE users SET level = 1 WHERE username = '" + username + "'");
         }
-
-        // initialize board BEFORE selecting map to avoid NullPointerException in Maps
-        board = new String[][]{
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "},
-                {" . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . ", " . "}
-        };
 
         mp.mapSelecter(level);//This will update the map
 
