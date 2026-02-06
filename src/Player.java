@@ -7,12 +7,12 @@ public class Player {
     int row;
     int col;
 
-    Player (String name,int score,int level,int rowCordinate, int colordinate){
+    Player (String name,int score,int level,int rowCordinate, int colCordinate){
         this.username = name;
         this.score = score;
         this.level = level;
         this.row = rowCordinate;
-        this.col = colordinate;
+        this.col = colCordinate;
 
     }
     public boolean move(){
@@ -21,6 +21,32 @@ public class Player {
         System.out.println("Moves: W (up) , S (down) , A (Left) , D (Right)");
         System.out.print("Enter direction: ");
         char direction = sc.next().toLowerCase().charAt(0);
+
+        int temprow = row;
+        int tempcol = col;
+
+        switch (direction){//Checking movement before proceed
+            case 'w':
+                temprow--;
+                break;
+            case 's':
+                temprow++;
+                break;
+            case 'a':
+                tempcol--;
+                break;
+            case 'd':
+                tempcol++;
+                break;
+            default:
+                System.out.println("Invalid direction");
+        }
+
+        if(verifyMovement(temprow,tempcol)){
+            System.out.println("Invalid movement.Don't try to step out from scope.");
+            return true;
+        }
+
         switch (direction){//Making player movement
             case 'w':
                 Main.board [row][col] = " . ";
@@ -40,43 +66,26 @@ public class Player {
                 break;
             default:
                 System.out.println("Invalid direction");
-                move();
-        }
-        if (verifyMovement(row,col)){//reversing player movement if movement is wrong
-            System.out.println("Invalid move");
-            switch (direction){
-                case 'w':
-                    row++;
-                    move();
-                    break;
-                case 's':
-                    row--;
-                    move();
-                    break;
-                case 'a':
-                    col++;
-                    move();
-                    break;
-                case 'd':
-                    col--;
-                    move();
-                    break;
-                default:
-                    System.out.println("Something went wrong");
-            }
-            Main.board [row][col] = " P ";//undo player movement
             move();
-
         }
-        Main.board [row][col] = " P ";
+
+        if(Main.board[row][col].equals(" x ")){
+            GameOver();
+            return false;
+        }
+        Main.board [row][col] = " 👮🏽‍♂️";
         return true;
     }
-    public boolean verifyMovement(int row,int col){
-        if((row<0 || col<0) || (row>9 || col>9)){
+    public boolean verifyMovement(int temprow,int tempcol){
+        if((temprow<0 || tempcol<0) || (temprow>9 || tempcol>9)){
             return true;
         }else{
             return false;
         }
+    }
+    public void GameOver(){
+        System.out.println("You walked into a trap.");
+        System.out.println("Game Over, Try Again!");
     }
 }
 
