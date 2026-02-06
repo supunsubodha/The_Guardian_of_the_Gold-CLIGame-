@@ -69,14 +69,15 @@ public class Player {
             move();
         }
 
-        if(Main.board[row][col].equals(" x ")){
+        if(Main.board[row][col].equals(" x ")){//Compare player's position with bomb postions
             GameOver();
             return false;
         }
         Main.board [row][col] = " 👮🏽‍♂️";
         return true;
     }
-    public boolean verifyMovement(int temprow,int tempcol){
+
+    public boolean verifyMovement(int temprow,int tempcol){//This function help to keep user inside the scope
         if((temprow<0 || tempcol<0) || (temprow>9 || tempcol>9)){
             return true;
         }else{
