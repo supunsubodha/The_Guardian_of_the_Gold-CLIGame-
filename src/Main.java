@@ -5,6 +5,8 @@ public class Main {
     static int score;
     static int level;
     static String [][]board;
+    static int rowStart;
+    static int colStart;
     public static void main(String[] args) {
 
         // initialize board BEFORE selecting map to avoid NullPointerException in Maps
@@ -75,9 +77,11 @@ public class Main {
 
         mp.mapSelecter(level);//This will update the map
 
-        System.out.println("Moves: U (up) , D (down) , L (Left) , R (Right)");
+        Player player = new Player(username,score,level,rowStart,colStart);//Starting player
+        while(player.move()){
+            //until player.move return false this loop will continuously call the player.move()
+        }
 
-        displayBoard();
     }
     //This method is for display the board
     public static void displayBoard(){
