@@ -6,6 +6,8 @@ public class Player {
     int level;
     int row;
     int col;
+    static int magnusMovement;
+    static boolean status;
 
     Player (String name,int score,int level,int rowCordinate, int colCordinate){
         this.username = name;
@@ -16,6 +18,7 @@ public class Player {
 
     }
     public boolean move(){
+        status = true;
         Scanner sc = new Scanner(System.in);
         Main.displayBoard();
         System.out.println("Moves: W (up) , S (down) , A (Left) , D (Right)");
@@ -69,12 +72,17 @@ public class Player {
             move();
         }
 
-        if(Main.board[row][col].equals(" x ")){//Compare player's position with bomb postions
+        if((Main.board[row][col].equals(" x ")) || (Main.board[row][col] == Main.board[Magnus.magnusRow][Magnus.magnusCol])){//Compare player's position with bombs and Magnus's positions
             GameOver();
             return false;
         }
+        if(Main.board[row][col].equals("💰")){
+            levelCompleted();
+        }
         Main.board [row][col] = " 👮🏽‍♂️";
-        return true;
+        magnusMovement++;
+        Magnus.magnusMovement(level,magnusMovement);
+        return status;
     }
 
     public boolean verifyMovement(int temprow,int tempcol){//This function help to keep user inside the scope
@@ -84,9 +92,16 @@ public class Player {
             return false;
         }
     }
-    public void GameOver(){
-        System.out.println("You walked into a trap.");
+    public static void GameOver(){
+        System.out.println("You walked into a trap or Magnus discovered you.");
         System.out.println("Game Over, Try Again!");
+        status=false;
+    }
+    public void levelCompleted(){
+        System.out.println("Congratulations! You got the level complete.");
+        String sql = "Update table users set level = "+(level+1)+" where username = '"+username+"'";
+        DatabaseConnection.sqlExecuter(sql);
+
     }
 }
 

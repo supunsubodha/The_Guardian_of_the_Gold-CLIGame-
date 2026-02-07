@@ -4,6 +4,8 @@ public class Maps {
             case 1:
                 Main.rowStart = 0;
                 Main.colStart = 0;
+                Magnus.magnusRow = 0;
+                Magnus.magnusCol = 6;
                 level1();
                 break;
             case 2:
