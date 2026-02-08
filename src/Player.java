@@ -97,6 +97,7 @@ public class Player {
         }
     }
     public static void GameOver(char reason){
+        Scanner sc = new Scanner(System.in);
         switch (reason){
             case 'm':
                 System.out.println("Magnus discovered the treasure.🦹🏽💰😔");
@@ -111,7 +112,10 @@ public class Player {
                 System.out.println("Invalid reason");
         }
         System.out.println("Game Over, Try Again!");
-        status=false;
+        System.out.println("Press enter to continue...");
+        sc.nextLine();
+        Main.resetGame();
+        Main.nextLevel();
     }
     public void levelCompleted(){
         Scanner sc = new Scanner(System.in);
