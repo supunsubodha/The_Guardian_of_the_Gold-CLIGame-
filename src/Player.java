@@ -114,11 +114,13 @@ public class Player {
         status=false;
     }
     public void levelCompleted(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("Congratulations!🎉 You got the level complete.");
         String sql = "UPDATE users SET level = " + (level + 1) + " WHERE username = '" + username + "'";
         DatabaseConnection.sqlExecuter(sql);
         Main.resetGame();
-        Maps maps  = new Maps();
-        maps.mapSelecter(level+1);
+        System.out.print("Press Enter to continue to the next level.");
+        sc.nextLine();
+        Main.nextLevel();
     }
 }

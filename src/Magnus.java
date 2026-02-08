@@ -23,7 +23,7 @@ public class Magnus {
                         magnusRow = maglevel2[magnusMovement][0];
                         magnusCol = maglevel2[magnusMovement][1];
                         if (magnusMovement != 0) {
-                            Main.board[maglevel2[magnusMovement - 1][0]][maglevel1[magnusMovement - 1][1]] = " . ";
+                            Main.board[maglevel2[magnusMovement - 1][0]][maglevel2[magnusMovement - 1][1]] = " . ";
                         }
                         if (magnusRow == 2 && magnusCol == 5) {
                             Player.GameOver('m');

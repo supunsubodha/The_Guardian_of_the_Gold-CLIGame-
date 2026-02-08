@@ -141,5 +141,20 @@ public class Main {
         Player.magnusMovement = 0;
         Player.status = true;
     }
+    public static void nextLevel(){
+        int [] userdata = DatabaseConnection.loadUserData(username);//Call and load userdata
+        score = userdata[0];
+        level = userdata[1];
+
+        Maps mp  = new Maps();
+        System.out.println("Your are in the Level: " + level);
+        mp.mapSelecter(level);//This will update the map
+
+        Player player = new Player(username,score,level,rowStart,colStart);//Starting player,starting points will handle by Maps.java
+        while(player.move()){
+            //until player.move return false this loop will continuously call the player.move()
+        }
+
+    }
 
 }
