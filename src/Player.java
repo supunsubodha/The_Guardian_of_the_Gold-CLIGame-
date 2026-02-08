@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Player {
@@ -72,9 +73,12 @@ public class Player {
             move();
         }
 
-        if((Main.board[row][col].equals(" x ")) || (Main.board[row][col] == Main.board[Magnus.magnusRow][Magnus.magnusCol])){//Compare player's position with bombs and Magnus's positions
-            GameOver();
+        if(Main.board[row][col].equals(" x ")){//Compare player's position with bombs and Magnus's positions
+            GameOver('x');
             return false;
+        }
+        if (row == Magnus.magnusRow && col == Magnus.magnusCol) {
+            GameOver('d');
         }
         if(Main.board[row][col].equals("💰")){
             levelCompleted();
@@ -92,16 +96,29 @@ public class Player {
             return false;
         }
     }
-    public static void GameOver(){
-        System.out.println("You walked into a trap or Magnus discovered you.");
+    public static void GameOver(char reason){
+        switch (reason){
+            case 'm':
+                System.out.println("Magnus discovered the treasure.🦹🏽💰😔");
+                break;
+            case 'x':
+                System.out.println("You walked into a trap.💣😔");
+                break;
+            case 'd':
+                System.out.println("Magnus found you. He will be follow you secretly.😨");
+                break;
+            default:
+                System.out.println("Invalid reason");
+        }
         System.out.println("Game Over, Try Again!");
         status=false;
     }
     public void levelCompleted(){
-        System.out.println("Congratulations! You got the level complete.");
-        String sql = "Update table users set level = "+(level+1)+" where username = '"+username+"'";
+        System.out.println("Congratulations!🎉 You got the level complete.");
+        String sql = "UPDATE users SET level = " + (level + 1) + " WHERE username = '" + username + "'";
         DatabaseConnection.sqlExecuter(sql);
-
+        Main.resetGame();
+        Maps maps  = new Maps();
+        maps.mapSelecter(level+1);
     }
 }
-

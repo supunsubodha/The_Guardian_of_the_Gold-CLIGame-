@@ -129,4 +129,17 @@ public class Main {
         System.out.println("Good luck.");
         sc.nextLine();
     }
+    public static void resetGame() {
+        // clear board
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                board[i][j] = " . ";
+            }
+        }
+
+        // reset shared state
+        Player.magnusMovement = 0;
+        Player.status = true;
+    }
+
 }
