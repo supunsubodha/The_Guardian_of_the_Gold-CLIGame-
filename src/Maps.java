@@ -38,6 +38,8 @@ public class Maps {
                 break;
             default:
                 System.out.println("All levels are completed.");
+                System.exit(0);
+
         }
     }
     // Holds characters,traps and treasures according to leve

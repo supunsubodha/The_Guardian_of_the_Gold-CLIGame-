@@ -19,12 +19,14 @@ public class Player {
 
     }
     public boolean move(){
+        SoundPlayer sp = new SoundPlayer();
         status = true;
         Scanner sc = new Scanner(System.in);
         Main.displayBoard();
         System.out.println("Moves: W (up) , S (down) , A (Left) , D (Right)");
         System.out.print("Enter direction: ");
         char direction = sc.next().toLowerCase().charAt(0);
+        sp.playSounds('m');
 
         int temprow = row;
         int tempcol = col;
@@ -83,6 +85,7 @@ public class Player {
         if(Main.board[row][col].equals("💰")){
             levelCompleted();
         }
+
         Main.board [row][col] = " 👮🏽‍♂️";
         magnusMovement++;
         Magnus.magnusMovement(level,magnusMovement);
@@ -119,9 +122,11 @@ public class Player {
     }
     public void levelCompleted(){
         Scanner sc = new Scanner(System.in);
+        SoundPlayer sp = new SoundPlayer();
         System.out.println("Congratulations!🎉 You got the level complete.");
         String sql = "UPDATE users SET level = " + (level + 1) + " WHERE username = '" + username + "'";
         DatabaseConnection.sqlExecuter(sql);
+        sp.playSounds('l');
         Main.resetGame();
         System.out.print("Press Enter to continue to the next level.");
         sc.nextLine();
