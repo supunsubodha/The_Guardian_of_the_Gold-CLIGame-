@@ -1,4 +1,5 @@
 🛡️ The Guardian of the Gold
+
 A Java console-based strategy game where you play as a government agent protecting an ancient treasure from a thief named Magnus. Navigate through traps, avoid Magnus, and reach the treasure before he does.
 
 🎮 Game Overview
