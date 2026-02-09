@@ -26,7 +26,7 @@ public class Player {
         System.out.println("Moves: W (up) , S (down) , A (Left) , D (Right)");
         System.out.print("Enter direction: ");
         char direction = sc.next().toLowerCase().charAt(0);
-        sp.playSounds('m');
+        sp.playSounds('m',false);
 
         int temprow = row;
         int tempcol = col;
@@ -74,13 +74,9 @@ public class Player {
                 System.out.println("Invalid direction");
             move();
         }
-
         if(Main.board[row][col].equals(" x ")){//Compare player's position with bombs and Magnus's positions
             GameOver('x');
             return false;
-        }
-        if (row == Magnus.magnusRow && col == Magnus.magnusCol) {
-            GameOver('d');
         }
         if(Main.board[row][col].equals("💰")){
             levelCompleted();
@@ -89,6 +85,9 @@ public class Player {
         Main.board [row][col] = " 👮🏽‍♂️";
         magnusMovement++;
         Magnus.magnusMovement(level,magnusMovement);
+        if (row == Magnus.magnusRow && col == Magnus.magnusCol) {
+            GameOver('d');
+        }
         return status;
     }
 
@@ -115,7 +114,7 @@ public class Player {
                 System.out.println("Invalid reason");
         }
         SoundPlayer sp = new SoundPlayer();
-        sp.playSounds('o');
+        sp.playSounds('o',false);
         System.out.println(Colors.RED+"Game Over, Try Again!"+Colors.RESET);
         System.out.println("Press enter to continue...");
         sc.nextLine();
@@ -128,7 +127,7 @@ public class Player {
         System.out.println(Colors.GREEN+"Congratulations!🎉 You got the level complete."+Colors.RESET);
         String sql = "UPDATE users SET level = " + (level + 1) + " WHERE username = '" + username + "'";
         DatabaseConnection.sqlExecuter(sql);
-        sp.playSounds('l');
+        sp.playSounds('l',false);
         Main.resetGame();
         System.out.print("Press Enter to continue to the next level.");
         sc.nextLine();

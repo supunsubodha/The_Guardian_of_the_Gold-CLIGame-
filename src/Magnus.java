@@ -18,6 +18,7 @@ public class Magnus {
                             Main.board[maglevel1[magnusMovement - 1][0]][maglevel1[magnusMovement - 1][1]] = " . ";
                         }
                         if (magnusRow == 9 && magnusCol == 9) {
+                            Main.board[magnusRow][magnusCol] = " 🦹🏽";
                             Player.GameOver('m');
                         }
                         Main.board[magnusRow][magnusCol] = " 🦹🏽";
