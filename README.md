@@ -51,7 +51,7 @@ Java Sound API
 
 1️⃣ Clone the repository
 
-git clone https://github.com/your-username/guardian-of-the-gold.git
+git clone https://github.com/supunsubodha/The_Guardian_of_the_Gold-CLIGame-.git
 cd guardian-of-the-gold
 
 2️⃣ Compile
