@@ -99,7 +99,7 @@ public class Main {
     public static void newUserInstructions(){
         SoundPlayer sp = new SoundPlayer();
         Scanner sc = new Scanner(System.in);
-        System.out.println("These instructions will be displayed only for new users. (Press Enter to continue)");
+        System.out.println(Colors.GREEN+"These instructions will be displayed only for new users. (Press Enter to continue)");
         sc.nextLine();
         sp.playSounds('c');
         System.out.println("In this game, you are a special government agent working to protect an ancient treasure that is about to be stolen by a thief named 'Magnus'.");
@@ -138,7 +138,7 @@ public class Main {
         sc.nextLine();
         sp.playSounds('c');
 
-        System.out.println("Good luck.");
+        System.out.println("Good luck."+Colors.RESET);
         sc.nextLine();
         sp.playSounds('c');
     }

@@ -103,18 +103,20 @@ public class Player {
         Scanner sc = new Scanner(System.in);
         switch (reason){
             case 'm':
-                System.out.println("Magnus discovered the treasure.🦹🏽💰😔");
+                System.out.println(Colors.RED+"Magnus discovered the treasure.🦹🏽💰😔"+Colors.RESET);
                 break;
             case 'x':
-                System.out.println("You walked into a trap.💣😔");
+                System.out.println(Colors.RED+"You walked into a trap.💣😔"+Colors.RESET);
                 break;
             case 'd':
-                System.out.println("Magnus found you. He will be follow you secretly.😨");
+                System.out.println(Colors.RED+"Magnus found you. He will be follow you secretly.😨"+Colors.RESET);
                 break;
             default:
                 System.out.println("Invalid reason");
         }
-        System.out.println("Game Over, Try Again!");
+        SoundPlayer sp = new SoundPlayer();
+        sp.playSounds('o');
+        System.out.println(Colors.RED+"Game Over, Try Again!"+Colors.RESET);
         System.out.println("Press enter to continue...");
         sc.nextLine();
         Main.resetGame();
@@ -123,7 +125,7 @@ public class Player {
     public void levelCompleted(){
         Scanner sc = new Scanner(System.in);
         SoundPlayer sp = new SoundPlayer();
-        System.out.println("Congratulations!🎉 You got the level complete.");
+        System.out.println(Colors.GREEN+"Congratulations!🎉 You got the level complete."+Colors.RESET);
         String sql = "UPDATE users SET level = " + (level + 1) + " WHERE username = '" + username + "'";
         DatabaseConnection.sqlExecuter(sql);
         sp.playSounds('l');

@@ -17,8 +17,10 @@ public class SoundPlayer {
                 break;
             case 'b':
                 path = "sounds/background.wav";
+                break;
             case 'c':
                 path = "sounds/click.wav";
+                break;
             default:
 
         }
